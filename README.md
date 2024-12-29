@@ -9,6 +9,10 @@ This is a Shopping App built with flutter with a modern UI Look & feel featuring
 - add to Shop Cart Feature.
 - Responsive layout that adjusts image sizes based on the screen dimensions
 
+## Features to be added Soon:
+- Creating a Sign-up page
+- Some Enhancements in UI
+
 ## Home Page UI Design Structure:
 
 ## Application Screenshots: 
