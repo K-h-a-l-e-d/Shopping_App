@@ -1,16 +1,15 @@
-# shopping_app_ui
+# Shopping App
 
-A new Flutter project.
+## Description
+This is a Shopping App built with flutter with a modern UI Look & feel featuring List of products & Hot Offers 
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Displays list of Products Along with Info.
+- add to Shop Cart Feature.
+- Responsive layout that adjusts image sizes based on the screen dimensions
 
-A few resources to get you started if this is your first Flutter project:
+## Home Page UI Design Structure:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Application Screenshots: 
+![CodeOutput](https://github.com/user-attachments/assets/faa72998-db40-496f-af2d-b55179af01ff)
