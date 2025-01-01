@@ -1,12 +1,53 @@
 import 'package:flutter/material.dart';
-import 'products_data.dart';
+import 'package:shopping_app_ui/navbar_pages/authentication/login_page.dart';
+import 'package:shopping_app_ui/navbar_pages/products_page.dart';
+import 'package:shopping_app_ui/navbar_pages/profile.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required String title});
+bool isLoggedIn = false;
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int selectedPage = 0;
+
+  List<Widget> pages = [Home(), Profile()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Container(
+        color: Colors.white,
+        width: MediaQuery.of(context).size.width * 0.8,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            isLoggedIn
+                ? ListTile(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginPage(),
+                        )),
+                    title: Text('Log out'),
+                    trailing: Icon(Icons.logout),
+                  )
+                : ListTile(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginPage(),
+                        )),
+                    title: Text('Log in'),
+                    trailing: Icon(Icons.login),
+                  ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Text("Electronics Stores",
             style: TextStyle(
@@ -17,114 +58,19 @@ class MyHomePage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.blue.shade200,
       ),
-      body: ListView(children: [
-        Text(
-          'Our Products',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.12,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: productsList.length,
-            itemBuilder: (context, index) {
-              return Image.asset(productsList[index][1]);
-            },
-          ),
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.68,
-          child: GridView.builder(
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-            itemCount: productsList
-                .length, //Builds a Grid based on the No. of products in stock
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8),
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 6),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.5),
-                        spreadRadius: 1,
-                        blurRadius: 4,
-                        offset: Offset(0, 1), // changes position of shadow
-                      )
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Column(
-                      spacing: 3,
-                      children: [
-                        Expanded(
-                          child: Image.asset(
-                            "${productsList[index][1]}",
-                          ),
-                        ),
-                        Text(
-                          '${productsList[index][0]}',
-                          style: TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold),
-                        ),
-                        Icon(Icons.add_shopping_cart)
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-        Text(
-          'Hot Offers',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.23,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: productsList.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    boxShadow: [
-                      BoxShadow(
-                        spreadRadius: 1,
-                        blurRadius: 8,
-                        offset: Offset(0, 1),
-                        color: Colors.black.withValues(alpha: 0.5),
-                      )
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Image.asset(
-                          productsList[index][1],
-                        ),
-                      ),
-                      Text(
-                        '50% off Sale',
-                        style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-        )
-      ]),
+      body: pages[selectedPage],
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: selectedPage,
+          onTap: navigateToSelectedPage,
+          items: [
+            BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
+            BottomNavigationBarItem(label: "Profile", icon: Icon(Icons.person)),
+          ]),
     );
+  }
+
+  void navigateToSelectedPage(int index) {
+    selectedPage = index;
+    setState(() {});
   }
 }
