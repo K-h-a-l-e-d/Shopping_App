@@ -1,0 +1,17 @@
+{
+    "appBar_title": "متجر الكترونيات",
+    "products_title": "منتجاتنا",
+    "hot_offers_title": "عروض و خصومات",
+    "offer": "خصم %50",
+    "log_in": "تسجيل الدخول",
+    "log_out": "تسجيل الخروج",
+    "profile": "الملف الشخصي",
+    "home": "الصفحة الرئيسية",
+    "email": "البريد الإلكتروني",
+    "create_new_account": "إنشاء حساب جديد",
+    "sign_up": "إنشاء حساب جديد",
+    "full_name": "الاسم بالكامل",
+    "password": "كلمة السر",
+    "confirm_password": "تأكيد كلمة السر",
+    "change_language": "تغيير اللغة"
+}

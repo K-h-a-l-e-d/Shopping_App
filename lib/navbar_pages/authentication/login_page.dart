@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../home_screen.dart';
+import '../../utils/helper_functions.dart';
 import 'sign_up_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -10,7 +12,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool hiddenPassword = true;
+  bool isHiddenPassword = true;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -19,12 +21,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade200,
+        backgroundColor: Colors.blue.withValues(alpha: 0.5),
         centerTitle: true,
         title: Text(
-          'Electronics Stores',
+          tr('appBar_title'),
           style: TextStyle(
-              fontSize: 30,
+              fontSize: 20,
               fontFamily: 'Playfair Display',
               fontWeight: FontWeight.bold,
               color: const Color.fromARGB(255, 16, 53, 83)),
@@ -38,12 +40,11 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               spacing: 15,
               children: [
-                Image.network(
-                    "https://logos-world.net/wp-content/uploads/2022/06/Capgemini-Logo-700x394.png"),
+                Image.asset('assets/images/estore.jpg'),
                 TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
-                      labelText: 'Email',
+                      labelText: tr('email'),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: BorderSide(color: Colors.blue)),
@@ -52,13 +53,15 @@ class _LoginPageState extends State<LoginPage> {
                       )),
                   validator: (value) {
                     if (value != null && value.isEmpty) {
-                      return 'Email not valid';
+                      return 'Email cannot be empty';
+                    } else if (!(value!.contains('@'))) {
+                      return 'Email must contain @[mai]';
                     }
                     return null;
                   },
                 ),
                 TextFormField(
-                  obscureText: hiddenPassword,
+                  obscureText: isHiddenPassword,
                   controller: passwordController,
                   validator: (value) {
                     if (value != null && value.length < 6) {
@@ -67,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                   decoration: InputDecoration(
-                    labelText: 'Password',
+                    labelText: tr('password'),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide: BorderSide(color: Colors.blue)),
@@ -76,46 +79,30 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     suffixIcon: IconButton(
                         onPressed: () {
-                          togglePassword();
+                          togglePasswordVisibility();
                         },
-                        icon: Icon(hiddenPassword
+                        icon: Icon(isHiddenPassword
                             ? Icons.visibility
                             : Icons.visibility_off)),
                   ),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    debugPrint(emailController.text);
-                    debugPrint(passwordController.text);
                     if (_formKey.currentState!.validate()) {
                       isLoggedIn = true;
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyHomePage(),
-                          ));
+                      navigateTo(context, MyHomePage());
                     } else {
-                      SnackBar snackBar = SnackBar(
-                        content: Text("Enter a valid data"),
-                        duration: Duration(seconds: 2),
-                        action: SnackBarAction(label: 'OK', onPressed: () {}),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      snackBarMsg(context, msg: 'Please Enter a valid data');
                     }
                   },
-                  child: Text("Login"),
+                  child: Text(tr('log_in')),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SignUpPage(),
-                      ),
-                    );
-                  },
-                  child: Text('Create new Account'),
-                )
+                Hero(
+                  tag: "signTag",
+                  child: ElevatedButton.icon(
+                      onPressed: () => navigateTo(context, SignUpPage()),
+                      label: Text(tr('create_new_account'))),
+                ),
               ],
             ),
           ),
@@ -124,36 +111,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  togglePassword() {
-    hiddenPassword = !hiddenPassword;
+  togglePasswordVisibility() {
+    isHiddenPassword = !isHiddenPassword;
     setState(() {});
-  }
-
-  Future<void> _showMyDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: const SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('This is a demo alert dialog.'),
-                Text('Would you like to approve of this message?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Approve'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 }

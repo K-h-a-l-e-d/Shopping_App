@@ -1,0 +1,17 @@
+{
+    "appBar_title": "Electronics Store",
+    "products_title": "Our Products",
+    "hot_offers_title": "Hot Offers",
+    "offer": "50% off sale",
+    "log_in": "Log in",
+    "log_out": "Log out",
+    "profile": "Profile",
+    "home": "Home",
+    "email": "Email Address",
+    "create_new_account": "Create new Account",
+    "sign_up": "Sign up",
+    "full_name": "Full Name",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "change_language": "Change Language"
+}

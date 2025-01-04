@@ -23,12 +23,12 @@ class _ProfileState extends State<Profile> {
           ),
           isLoggedIn
               ? Text(
-                  'Logged in as a Guest',
+                  'Username',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 22),
                 )
               : Text(
-                  'UserName',
+                  'Logged in as a Guest',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 22),
                 ),
