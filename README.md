@@ -16,6 +16,8 @@ featuring Browsing Electronics Store products, Hot Offers & adding items to cart
 |![ProductsPage](https://github.com/user-attachments/assets/c2cb11db-f4df-446e-9952-ab6f41167ccf)|![ProductsPageExtension](https://github.com/user-attachments/assets/716746c4-68aa-4cc5-9c5d-48627fa046a2)|![ProfilePage](https://github.com/user-attachments/assets/e2104884-7d78-44b9-9e95-3e790610b599)|
 |-|-|-|
 |![LoginPage](https://github.com/user-attachments/assets/50f722f8-5e43-4a19-92d4-4446f1d1062e)|![SignupPage](https://github.com/user-attachments/assets/38c11403-ea3a-406e-8e51-46f5e6b29c14)|![Drawer](https://github.com/user-attachments/assets/954ee093-1de8-4515-81ab-8e6863bd000f)|
+|-|-|-|
+|![s1](https://github.com/user-attachments/assets/eccb7741-4616-463a-ae1d-94815bc9b4f6)|![s2](https://github.com/user-attachments/assets/cba7340b-9cd4-46af-ad5e-b797bd1996f0)|![s4](https://github.com/user-attachments/assets/2514a5c1-8523-47e3-a824-60946802d615)|
 
 ## App Overview Video:
 https://github.com/user-attachments/assets/c28b8710-4bd1-4e41-9d21-6ca9a9f07517
