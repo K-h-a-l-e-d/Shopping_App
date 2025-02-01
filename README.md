@@ -1,16 +1,27 @@
 # Shopping App
 
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
+
 ## Description
-This is a Simple Shopping App built in flutter with a modern UI Look & feel,
-featuring Browsing Electronics Store products, Hot Offers & adding items to cart feature.
+This is a Simple Shopping App built in flutter,
+featuring Browsing Electronics Store products, diplaying Hot Offers along with add items to cart feature.
 
 ## Features
 
-- Displays a list of Products Along with their Info.
-- User Authentication 
-- add to Shop Cart Feature. (limited)
-- Localization (English <=> Arabic)
-- Responsive UI layout which adjusts Application Screen Size based on the device dimensions
+- 🌐 Multi-language support (English/Arabic)
+- 🔥 Firebase Authentication
+- 🛍 Product catalog display
+- 🛒 Basic shopping cart functionality
+- 🔄 Right-to-Left (RTL) layout support
+- 🎨 Responsive UI design
+
+## Core Functionality Overview
+ - Product Display: Grid and List views with mock data
+ - Firebase Integration: signup and login with Firebase email/password method
+ - Navigation: Drawer + Bottom Navigation Bar
+ - User Profile: Basic profile display with Firebase user data
+ - Localization: English/Arabic support using EasyLocalization
 
 ## Application Screenshots: 
 |![ProductsPage](https://github.com/user-attachments/assets/c2cb11db-f4df-446e-9952-ab6f41167ccf)|![ProductsPageExtension](https://github.com/user-attachments/assets/716746c4-68aa-4cc5-9c5d-48627fa046a2)|![ProfilePage](https://github.com/user-attachments/assets/e2104884-7d78-44b9-9e95-3e790610b599)|
@@ -22,3 +33,16 @@ featuring Browsing Electronics Store products, Hot Offers & adding items to cart
 ## App Overview Video:
 https://github.com/user-attachments/assets/c28b8710-4bd1-4e41-9d21-6ca9a9f07517
 
+## Installation
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/K-h-a-l-e-d/Shopping_App
+   cd Shopping_App
+2. **Install dependencies**
+```bash
+flutter pub get
+```
+3. **Run the app**
+```bash
+flutter run
+```
