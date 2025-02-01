@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_app_ui/navbar_pages/authentication/login_page.dart';
 import 'package:shopping_app_ui/navbar_pages/products_page.dart';
@@ -22,37 +23,33 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Container(
-        color: Colors.white,
-        width: MediaQuery.of(context).size.width * 0.8,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            ListTile(
-                title: Text(tr('change_language')),
-                trailing: Icon(Icons.language),
-                onTap: () {
-                  context.locale == Locale('en', 'US')
-                      ? context.setLocale(Locale('ar', 'EG'))
-                      : context.setLocale(Locale('en', 'US'));
-                }),
-            isLoggedIn
-                ? ListTile(
-                    title: Text(tr('log_out')),
-                    trailing: Icon(Icons.logout),
-                    onTap: () {
-                      isLoggedIn = false;
-                      navigateTo(context, LoginPage());
-                      setState(() {});
-                    },
-                  )
-                : ListTile(
-                    title: Text(tr('log_in')),
-                    trailing: Icon(Icons.login),
-                    onTap: () => navigateTo(context, LoginPage()),
-                  ),
-          ],
-        ),
+      drawer: NavigationDrawer(
+        children: [
+          ListTile(
+              title: Text(tr('change_language')),
+              trailing: Icon(Icons.language),
+              onTap: () {
+                context.locale == Locale('en', 'US')
+                    ? context.setLocale(Locale('ar', 'EG'))
+                    : context.setLocale(Locale('en', 'US'));
+              }),
+          isLoggedIn
+              ? ListTile(
+                  title: Text(tr('log_out')),
+                  trailing: Icon(Icons.logout),
+                  onTap: () {
+                    isLoggedIn = false;
+                    FirebaseAuth.instance.signOut();
+                    navigateTo(context, LoginPage());
+                    setState(() {});
+                  },
+                )
+              : ListTile(
+                  title: Text(tr('log_in')),
+                  trailing: Icon(Icons.login),
+                  onTap: () => navigateTo(context, LoginPage()),
+                ),
+        ],
       ),
       appBar: AppBar(
         title: Text(tr('appBar_title'),

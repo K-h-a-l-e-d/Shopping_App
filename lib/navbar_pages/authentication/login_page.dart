@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../home_screen.dart';
 import '../../utils/helper_functions.dart';
@@ -55,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                     if (value != null && value.isEmpty) {
                       return 'Email cannot be empty';
                     } else if (!(value!.contains('@'))) {
-                      return 'Email must contain @[mai]';
+                      return 'Email must contain @[mail].com';
                     }
                     return null;
                   },
@@ -87,10 +88,31 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      isLoggedIn = true;
-                      navigateTo(context, MyHomePage());
+                      try {
+                        final credential = await FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text);
+                        if (credential.user != null) {
+                          navigateTo(context, MyHomePage());
+                          snackBarMsg(context, msg: 'logged in Successfully!');
+                          isLoggedIn = true;
+                        } else {
+                          snackBarMsg(context, msg: 'log in failed');
+                        }
+                      } on FirebaseAuthException catch (e) {
+                        snackBarMsg(context, msg: '${e.code}');
+                        if (e.code == 'weak-password') {
+                          print('The password provided is too weak.');
+                        } else if (e.code == 'email-already-in-use') {
+                          print('The account already exists for that email.');
+                        }
+                      } catch (e) {
+                        print(e);
+                        snackBarMsg(context, msg: '$e');
+                      }
                     } else {
                       snackBarMsg(context, msg: 'Please Enter a valid data');
                     }

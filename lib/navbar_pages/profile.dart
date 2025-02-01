@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_app_ui/home_screen.dart';
 
@@ -17,13 +18,13 @@ class _ProfileState extends State<Profile> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: 20,
         children: [
-          Image.asset(
-            "assets/images/profile_pic.jpg",
-            height: MediaQuery.of(context).size.height * 0.2,
+          Icon(
+            Icons.person,
+            size: MediaQuery.of(context).size.width / 2,
           ),
           isLoggedIn
               ? Text(
-                  'Username',
+                  FirebaseAuth.instance.currentUser!.displayName!,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 22),
                 )

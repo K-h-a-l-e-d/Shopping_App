@@ -5,6 +5,8 @@
     "offer": "50% off sale",
     "log_in": "Log in",
     "log_out": "Log out",
+    "weak-password": "The password provided is too weak",
+    "email-already-in-use": "The account already exists for that email",
     "profile": "Profile",
     "home": "Home",
     "email": "Email Address",

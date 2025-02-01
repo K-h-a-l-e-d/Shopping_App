@@ -9,6 +9,15 @@ void navigateTo(context, Widget route) {
   );
 }
 
+void navigateWithReplacementTo(context, Widget route) {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (context) => route,
+    ),
+  );
+}
+
 void snackBarMsg(context, {String msg = "", String label = "OK"}) {
   SnackBar snackBar = SnackBar(
     content: Text(msg),

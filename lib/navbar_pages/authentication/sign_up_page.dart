@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_app_ui/home_screen.dart';
 import '../../utils/animations.dart';
@@ -86,7 +87,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     if (value != null && value.isEmpty) {
                       return 'Email cannot be empty';
                     } else if (!(value!.contains('@'))) {
-                      return 'Email must contain @[mai]';
+                      return 'Email must contain @[mail]';
                     }
                     return null;
                   },
@@ -146,9 +147,24 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 ElevatedButton(
                   child: Text(tr('sign_up')),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      _showDialogMsgThenNavigateTo(context, MyHomePage());
+                      try {
+                        final credential = await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                          email: emailController.text,
+                          password: passwordController.text,
+                        );
+                        credential.user!
+                            .updateDisplayName(fullNameController.text);
+
+                        _showDialogMsgThenNavigateTo(context, MyHomePage());
+                      } on FirebaseAuthException catch (e) {
+                        snackBarMsg(context, msg: e.message!);
+                      } catch (e) {
+                        print(e.toString());
+                        snackBarMsg(context, msg: e.toString());
+                      }
                     } else {
                       snackBarMsg(context, msg: 'Please Enter valid data');
                     }

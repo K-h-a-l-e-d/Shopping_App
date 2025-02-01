@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
@@ -24,10 +31,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Shopping App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: false,
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
