@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
+import 'package:shopping_app_ui/flags.dart';
+import 'landing_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -26,17 +27,20 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Shopping App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      home: const MyHomePage(),
+    //listening for a change in isDarkThemeEnabled flag and toggling the app dark theme mode accordingly
+    return ValueListenableBuilder(
+      valueListenable: isDarkThemeEnabled,
+      builder: (context, isDarkThemeEnabled, child) => MaterialApp(
+        title: 'Shopping App',
+        debugShowCheckedModeBanner: false,
+        theme: isDarkThemeEnabled ? ThemeData.dark() : ThemeData.light(),
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        home: MyHomePage(),
+      ),
     );
   }
 }

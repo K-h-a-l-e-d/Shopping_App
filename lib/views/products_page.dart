@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:shopping_app_ui/home_screen.dart';
+import 'package:shopping_app_ui/flags.dart';
 import '../utils/helper_functions.dart';
 import '../utils/products_inventory.dart';
 
@@ -12,6 +12,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //this controller will be used to change Hot Offers' section arrow direction
+  //where it tracks the list position and changes the arrow direction when the list
+  //reaches its maximum extent
   final ScrollController _listScrollController = ScrollController();
   bool _isListAtEnd = false;
 
@@ -79,7 +82,7 @@ class _HomeState extends State<Home> {
                         style: TextStyle(fontSize: 15),
                       ),
                       IconButton(
-                        onPressed: () => isLoggedIn
+                        onPressed: () => isLoggedIn.value
                             ? snackBarMsg(context, msg: 'Item added to Cart')
                             : snackBarMsg(context, msg: 'You must login First'),
                         icon: Icon(Icons.shopping_cart_checkout),

@@ -1,9 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../home_screen.dart';
-import '../../utils/helper_functions.dart';
-import 'sign_up_page.dart';
+import 'package:shopping_app_ui/flags.dart';
+import 'package:shopping_app_ui/landing_page.dart';
+import 'package:shopping_app_ui/utils/helper_functions.dart';
+import 'package:shopping_app_ui/views/authentication/sign_up_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -21,18 +22,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue.withValues(alpha: 0.5),
-        centerTitle: true,
-        title: Text(
-          tr('appBar_title'),
-          style: TextStyle(
-              fontSize: 20,
-              fontFamily: 'Playfair Display',
-              fontWeight: FontWeight.bold,
-              color: const Color.fromARGB(255, 16, 53, 83)),
-        ),
-      ),
       body: Form(
         key: _formKey,
         child: Padding(
@@ -96,9 +85,9 @@ class _LoginPageState extends State<LoginPage> {
                                 email: emailController.text,
                                 password: passwordController.text);
                         if (credential.user != null) {
-                          navigateTo(context, MyHomePage());
                           snackBarMsg(context, msg: 'logged in Successfully!');
-                          isLoggedIn = true;
+                          isLoggedIn.value = true;
+                          navigateTo(context, MyHomePage());
                         } else {
                           snackBarMsg(context, msg: 'log in failed');
                         }
