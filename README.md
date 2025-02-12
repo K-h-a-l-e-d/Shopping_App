@@ -19,11 +19,65 @@ featuring Browsing Electronics Store products, diplaying Hot Offers along with a
 - 🌓 Dark/Light mode
 
 ## Core Functionality Overview
- - Product Display: Grid and List views with mock data
+ - Product Display: Grid and List views with products' data(Picture/Name/Hot Offers ) along with add to cart Icon
  - Firebase Integration: signup and login with Firebase email/password method
- - Navigation: Drawer + Bottom Navigation Bar
+ - Authentication: biometric authentication gate on user profile page 
+ - Navigation: Drawer and Bottom Navigation Bar
  - User Profile: Basic profile display with Firebase user data
  - Localization: English/Arabic support using EasyLocalization
+
+ ## Application Workflow Abstract
+
+1. Initialization Phase (main.dart)
+
+    Firebase Setup: Initializes Firebase services using platform-specific configurations
+
+    Localization: Configures bilingual support (EN/AR) with EasyLocalization
+
+    Theme System: Implements reactive dark/light mode via ValueNotifier state management
+
+2. Core Authentication Flow
+
+    Email/Password Auth:
+    SignUpPage → Firebase createUserWithEmailAndPassword → User credential storage
+    LoginPage → Firebase signInWithEmailPassword → Session management
+
+    Biometric authentication Gate (profile.dart):
+    LocalAuthApi → Device-native Biometric auth → Conditional User profile access
+
+3. UI Rendering Pipeline
+
+    Navigation Architecture:
+    BottomNavigationBar ↔ Home()/Profile()
+    NavigationDrawer → Language toggle Button ↔ Dark/Light Theme switcher Button ↔ Auth status: Log out button appears only during login sessions  
+
+    Product Display:
+    products_inventory.dart → GridView/ListView builders → products' data(Picture/Name/Hot Offers) along with add to cart Icon
+
+    RTL Support:
+    context.locale detection → Dynamic layout direction
+
+4. State & Data Flow
+
+    Global Flags (flags.dart):
+    ValueNotifier<bool> for:
+
+        isDarkThemeEnabled → application Theme rebuild
+
+        isLoggedIn → Auth state propagation
+
+    User Data:
+    FirebaseAuth → currentUser → Profile display
+
+5. Helper Modules
+
+    Validators: Email/password regex checks(making sure user provide a valid email/and a Password 6 chars long atleast)
+
+    Animations: Custom FadeTransitionPageRoute → navigate with animation on a successfull sign up process
+
+    Navigation Utilities:
+    navigateTo()/navigateWithReplacementTo() → Route Page 
+
 
 ## Application Screenshots: 
 |![ProductsPage](https://github.com/user-attachments/assets/c2cb11db-f4df-446e-9952-ab6f41167ccf)|![ProductsPageExtension](https://github.com/user-attachments/assets/716746c4-68aa-4cc5-9c5d-48627fa046a2)|![ProfilePage](https://github.com/user-attachments/assets/e2104884-7d78-44b9-9e95-3e790610b599)|
