@@ -21,7 +21,7 @@ featuring Browsing Electronics Store products, diplaying Hot Offers along with a
 ## Core Functionality Overview
  - Product Display: Grid and List views with products' data(Picture/Name/Hot Offers ) along with add to cart Icon
  - Firebase Integration: signup and login with Firebase email/password method
- - Authentication: biometric authentication gate on user profile page 
+ - Authentication: Firebase authentication & device biometric authentication gate on user profile page 
  - Navigation: Drawer and Bottom Navigation Bar
  - User Profile: Basic profile display with Firebase user data
  - Localization: English/Arabic support using EasyLocalization
